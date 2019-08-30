@@ -63,4 +63,13 @@ class TupleUT extends Specification {
         expect:
             p - v == point(-2, -4, -6)
     }
+
+    def 'subtracting two vectors should result in a vector'() {
+        given:
+            def v1 = vector(3,2,1)
+            def v2 = vector(5,6,7)
+
+        expect:
+            v1 - v2 == vector(-2, -4, -6)
+    }
 }
