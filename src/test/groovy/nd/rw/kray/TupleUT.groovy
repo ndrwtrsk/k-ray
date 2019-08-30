@@ -72,4 +72,12 @@ class TupleUT extends Specification {
         expect:
             v1 - v2 == vector(-2, -4, -6)
     }
+
+    def 'negate a tuple'() {
+        given:
+            def a = new Tuple(1, -2, 3, -4)
+
+        expect:
+            -a == new Tuple(-1, 2, -3, 4)
+    }
 }
