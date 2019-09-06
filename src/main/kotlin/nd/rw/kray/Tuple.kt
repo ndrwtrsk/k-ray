@@ -21,7 +21,7 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     val isVector: Boolean
         get() = w == 0.0
 
-    fun plus(other: Tuple): Tuple {
+    operator fun plus(other: Tuple): Tuple {
         return Tuple(
             x = this.x + other.x,
             y = this.y + other.y,
@@ -30,12 +30,21 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         )
     }
 
-    fun minus(other: Tuple): Tuple {
+    operator fun minus(other: Tuple): Tuple {
         return Tuple(
             x = this.x - other.x,
             y = this.y - other.y,
             z = this.z - other.z,
             w = this.w - other.w
+        )
+    }
+
+    operator fun unaryMinus(): Tuple {
+        return Tuple(
+            x = -this.x,
+            y = -this.y,
+            z = -this.z,
+            w = -this.w
         )
     }
 
