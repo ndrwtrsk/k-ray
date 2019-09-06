@@ -3,7 +3,7 @@ package nd.rw.kray
 import com.winterbe.expekt.should
 
 import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
+ import org.spekframework.spek2.style.specification.describe
 
 class ColorSpec : Spek({
 
@@ -23,6 +23,14 @@ class ColorSpec : Spek({
                     .should.equal(Color(1.6, 0.7, 1.0))
             }
         }
+
+        describe("subtraction") {
+            it("should subtract color components") {
+                (Color(0.9, 0.6, 0.75) - Color(0.7, 0.1, 0.25))
+                    .should.equal(Color(0.2, 0.5, 0.5))
+            }
+        }
+
     }
 
 })

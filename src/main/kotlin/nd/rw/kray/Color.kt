@@ -1,11 +1,13 @@
 package nd.rw.kray
 
+import kotlin.math.abs
+
 class Color(val red: Double, val green: Double, val blue: Double) {
 
     constructor(red: Number, green: Number, blue: Number)
             : this(red.toDouble(), green.toDouble(), blue.toDouble())
 
-    operator fun plus(other: Color): Any {
+    operator fun plus(other: Color): Color {
         return Color(
             red = red + other.red,
             green = green + other.green,
@@ -13,7 +15,13 @@ class Color(val red: Double, val green: Double, val blue: Double) {
         )
     }
 
-
+    operator fun minus(other: Color): Color {
+        return Color(
+            red = red - other.red,
+            green = green - other.green,
+            blue = blue - other.blue
+        )
+    }
 
     override fun toString(): String {
         return "Color(r=$red, g=$green, b=$blue)"
@@ -25,10 +33,12 @@ class Color(val red: Double, val green: Double, val blue: Double) {
 
         other as Color
 
-        if (red != other.red) return false
-        if (green != other.green) return false
-        if (blue != other.blue) return false
+        if (!red.equalsWithMargin(other.red)) return false
+        if (!green.equalsWithMargin(other.green)) return false
+        if (!blue.equalsWithMargin(other.blue)) return false
 
         return true
     }
 }
+
+
