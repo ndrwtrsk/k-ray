@@ -127,4 +127,24 @@ object TupleSpec : Spek({
             }
         }
     }
+
+    describe("normalization") {
+        describe("normalizing vector(4,0,0)") {
+            it("should result in vector(1,0,0)") {
+                vector(4, 0, 0).normalize.should.equal(vector(1, 0, 0))
+            }
+        }
+
+        describe("normalizing vector(1,2,3)") {
+            it("should result in vector(1/sqrt(14), 2/sqrt(14), 3/sqrt(14)") {
+                vector(1, 2, 3).normalize.should.equal(vector(1 / sqrt(14.0), 2 / sqrt(14.0), 3 / sqrt(14.0)))
+            }
+        }
+
+        describe("magnitude of a normalized vector") {
+            it("should be 1") {
+                vector(1,2,3).normalize.magnitude.should.equal(1.0)
+            }
+        }
+    }
 })

@@ -20,6 +20,17 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         }
     }
 
+    val normalize: Tuple
+        get() {
+            val magnitude = magnitude
+            return Tuple(
+                x = x / magnitude,
+                y = y / magnitude,
+                z = z / magnitude,
+                w = w / magnitude
+            )
+        }
+
     val isPoint: Boolean
         get() = w == 1.0
 
