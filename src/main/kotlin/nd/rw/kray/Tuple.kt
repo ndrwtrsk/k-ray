@@ -1,5 +1,7 @@
 package nd.rw.kray
 
+import kotlin.math.sqrt
+
 class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
     constructor(x: Number, y: Number, z: Number, w: Number)
@@ -8,12 +10,12 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     companion object {
 
         @JvmStatic
-        fun point(x: Double, y: Double, z: Double): Tuple {
+        fun point(x: Number, y: Number, z: Number): Tuple {
             return Tuple(x, y, z, 1.0)
         }
 
         @JvmStatic
-        fun vector(x: Double, y: Double, z: Double): Tuple {
+        fun vector(x: Number, y: Number, z: Number): Tuple {
             return Tuple(x, y, z, 0.0)
         }
     }
@@ -23,6 +25,14 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
     val isVector: Boolean
         get() = w == 0.0
+
+    val magnitude: Double
+        get() {
+            return sqrt(
+                x * x + y * y + z * z + w * w
+            )
+        }
+
 
     operator fun plus(other: Tuple): Tuple {
         return Tuple(

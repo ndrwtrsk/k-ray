@@ -5,6 +5,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import com.winterbe.expekt.should
 import nd.rw.kray.Tuple.Companion.vector
+import kotlin.math.sqrt
 
 object TupleSpec : Spek({
 
@@ -110,6 +111,20 @@ object TupleSpec : Spek({
                 (a / 2).should.equal(Tuple(0.5, -1, 1.5, -2))
             }
         }
+    }
 
+    describe("magnitude") {
+        listOf(
+            listOf(vector(1, 0, 0), 1.0),
+            listOf(vector(0, 1, 0), 1.0),
+            listOf(vector(0, 0, 1), 1.0),
+            listOf(vector(1, 2, 3), sqrt(14.0)),
+            listOf(vector(-1, -2, -3), sqrt(14.0))
+        ).forEach { test ->
+            it("${test[0]} magnitude should be ${test[1]}") {
+                val v = test[0] as Tuple
+                v.magnitude.should.equal(test[1] as Double)
+            }
+        }
     }
 })
