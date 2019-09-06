@@ -70,8 +70,8 @@ object TupleSpec : Spek({
             }
 
             describe("subtracting two vectors") {
-                val v1 = vector(3.0,2.0,1.0)
-                val v2 = vector(5.0,6.0,7.0)
+                val v1 = vector(3.0, 2.0, 1.0)
+                val v2 = vector(5.0, 6.0, 7.0)
 
                 it("should result in a vector") {
                     (v1 - v2).should.be.equal(vector(-2.0, -4.0, -6.0))
@@ -80,11 +80,27 @@ object TupleSpec : Spek({
         }
 
         describe("negation") {
-
             val a = Tuple(1.0, -2.0, 3.0, -4.0)
 
             it("should result in all values negated") {
                 (-a).should.equal(Tuple(-1.0, 2.0, -3.0, 4.0))
+            }
+        }
+
+        describe("scalar multiplication") {
+            val a = Tuple(1, -2, 3, -4)
+
+            describe("multiplying a tuple by a scalar") {
+                it("should result in all values multiplied") {
+                    (a * 3.5).should.equal(Tuple(3.5, -7.0, 10.5, -14.0))
+                }
+
+            }
+
+            describe("multiplying a tuple by a fraction") {
+                it("should result in all values multiplied") {
+                    (a * 0.5).should.equal(Tuple(0.5, -1, 1.5, -2))
+                }
             }
         }
 

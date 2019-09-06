@@ -2,6 +2,9 @@ package nd.rw.kray
 
 class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
+    constructor(x: Number, y: Number, z: Number, w: Number)
+            : this(x.toDouble(), y.toDouble(), z.toDouble(), w.toDouble())
+
     companion object {
 
         @JvmStatic
@@ -58,5 +61,14 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
                 && this.y == other.y
                 && this.z == other.z
                 && this.w == other.w
+    }
+
+    operator fun times(scalar: Number): Tuple {
+        return Tuple(
+            x = this.x * scalar.toDouble(),
+            y = this.y * scalar.toDouble(),
+            z = this.z * scalar.toDouble(),
+            w = this.w * scalar.toDouble()
+        )
     }
 }
