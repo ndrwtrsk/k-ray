@@ -114,7 +114,20 @@ object TupleSpec : Spek({
 
         describe("dot product") {
             it("should compute values") {
-                (vector(1, 2, 3) * vector(2, 3, 4)).should.equal(20.0)
+                (vector(1, 2, 3).dot(vector(2, 3, 4))).should.equal(20.0)
+            }
+        }
+
+        describe("cross product") {
+            val a = vector(1, 2, 3)
+            val b = vector(2, 3, 4)
+
+            it("$a cross $b == ${vector(-1, 2, -1)}") {
+                a.cross(b).should.equal(vector(-1, 2, -1))
+            }
+
+            it("$b cross $a == ${vector(1, -2, 1)}") {
+                b.cross(a).should.equal(vector(1, -2, 1))
             }
         }
     }
@@ -149,7 +162,7 @@ object TupleSpec : Spek({
 
         describe("magnitude of a normalized vector") {
             it("should be 1") {
-                vector(1,2,3).normalize.magnitude.should.equal(1.0)
+                vector(1, 2, 3).normalize.magnitude.should.equal(1.0)
             }
         }
     }

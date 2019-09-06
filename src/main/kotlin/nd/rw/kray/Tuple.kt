@@ -81,15 +81,19 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         )
     }
 
-    operator fun times(other: Tuple): Double {
+    fun dot(other: Tuple): Double {
         return x * other.x +
                 y * other.y +
                 z * other.z +
                 w * other.w
     }
 
-    fun dot(other: Tuple): Double {
-        return this * other;
+    fun cross(other: Tuple): Tuple {
+        return vector(
+            y * other.z - z * other.y,
+            z * other.x - x * other.z,
+            x * other.y - y * other.x
+        )
     }
 
     operator fun div(scalar: Number): Tuple {
