@@ -17,9 +17,19 @@ class CanvasSpec : Spek({
         it("every pixel is black Color(0,0,0)") {
             c.pixelGrid.forEach { row ->
                 row.forEach { pixel ->
-                    pixel.should.equal(Color(0,0,0))
+                    pixel.should.equal(Color(0, 0, 0))
                 }
             }
+        }
+    }
+
+    describe("Writing a pixel to a canvas") {
+        val c = Canvas(10, 20)
+        val red = Color(1, 0, 0)
+
+        c.writePixel(2,3,red)
+        it("pixel should be written") {
+            c.pixelAt(2,3).should.equal(red)
         }
     }
 
