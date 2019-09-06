@@ -23,6 +23,14 @@ class Color(val red: Double, val green: Double, val blue: Double) {
         )
     }
 
+    operator fun times(scalar: Number): Color {
+        return Color(
+            red = red * scalar.toDouble(),
+            green = green * scalar.toDouble(),
+            blue = blue * scalar.toDouble()
+        )
+    }
+
     override fun toString(): String {
         return "Color(r=$red, g=$green, b=$blue)"
     }

@@ -31,6 +31,12 @@ class ColorSpec : Spek({
             }
         }
 
+        describe("scalar multiplication") {
+            it("should multiply color by scalar") {
+                (Color(0.2, 0.3, 0.4) * 2).should.equal(Color(0.4, 0.6, 0.8))
+            }
+        }
+
     }
 
 })
