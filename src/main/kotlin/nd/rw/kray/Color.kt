@@ -31,9 +31,18 @@ class Color(val red: Double, val green: Double, val blue: Double) {
         )
     }
 
+    operator fun times(other: Color): Color {
+        return Color(
+            red = red * other.red,
+            green = green * other.green,
+            blue = blue * other.blue
+        )
+    }
+
     override fun toString(): String {
         return "Color(r=$red, g=$green, b=$blue)"
     }
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
