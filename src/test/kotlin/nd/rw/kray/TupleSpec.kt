@@ -111,6 +111,12 @@ object TupleSpec : Spek({
                 (a / 2).should.equal(Tuple(0.5, -1, 1.5, -2))
             }
         }
+
+        describe("dot product") {
+            it("should compute values") {
+                (vector(1, 2, 3) * vector(2, 3, 4)).should.equal(20.0)
+            }
+        }
     }
 
     describe("magnitude") {
