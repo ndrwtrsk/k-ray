@@ -104,5 +104,12 @@ object TupleSpec : Spek({
             }
         }
 
+        describe("division") {
+            val a = Tuple(1, -2, 3, -4)
+            it("should result in all values divided") {
+                (a / 2).should.equal(Tuple(0.5, -1, 1.5, -2))
+            }
+        }
+
     }
 })

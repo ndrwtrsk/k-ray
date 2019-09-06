@@ -51,6 +51,24 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         )
     }
 
+    operator fun times(scalar: Number): Tuple {
+        return Tuple(
+            x = this.x * scalar.toDouble(),
+            y = this.y * scalar.toDouble(),
+            z = this.z * scalar.toDouble(),
+            w = this.w * scalar.toDouble()
+        )
+    }
+
+    operator fun div(scalar: Number): Tuple {
+        return Tuple(
+            x = this.x / scalar.toDouble(),
+            y = this.y / scalar.toDouble(),
+            z = this.z / scalar.toDouble(),
+            w = this.w / scalar.toDouble()
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other?.javaClass != this.javaClass) return false
@@ -63,12 +81,9 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
                 && this.w == other.w
     }
 
-    operator fun times(scalar: Number): Tuple {
-        return Tuple(
-            x = this.x * scalar.toDouble(),
-            y = this.y * scalar.toDouble(),
-            z = this.z * scalar.toDouble(),
-            w = this.w * scalar.toDouble()
-        )
+    override fun toString(): String {
+        return "Tuple(x=$x, y=$y, z=$z, w=$w)"
     }
+
+
 }
