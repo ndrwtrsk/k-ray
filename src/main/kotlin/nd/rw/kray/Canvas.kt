@@ -12,4 +12,8 @@ class Canvas(val width: Int, val height: Int) {
         return pixelGrid[y][x]
     }
 
+    fun <EXPORT_TYPE> export(exporter: CanvasExporter<EXPORT_TYPE>) : EXPORT_TYPE {
+        return exporter.export(this)
+    }
+
 }
