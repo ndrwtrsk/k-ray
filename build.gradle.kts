@@ -15,7 +15,6 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.6")
-//    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
     testCompile("com.winterbe:expekt:0.5.0")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:2.0.6")
     testRuntimeOnly(kotlin("reflect"))
