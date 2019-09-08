@@ -13,6 +13,12 @@ class PpmCanvasExporter : CanvasExporter<PpmString> {
             .appendln("${canvas.width} ${canvas.height}")
             .appendln(255)
 
+        canvas.pixelGrid.forEach { row ->
+            builder.appendln(
+                row.joinToString(separator = " ", transform = { pixel -> pixel.toRgb() })
+            )
+        }
+
         return PpmString(builder.toString())
     }
 }

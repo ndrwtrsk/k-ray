@@ -46,4 +46,26 @@ class ColorSpec : Spek({
 
     }
 
+    describe("rbg formatting") {
+
+        describe("(1.5, 0, 0)") {
+            it("should return 250 0 0") {
+                Color(1.5, 0, 0).toRgb().should.equal("255 0 0")
+            }
+        }
+
+        describe("(0, 0.5, 0)") {
+            it("should return 0 128 0") {
+                Color(0, 0.5, 0).toRgb().should.equal("0 128 0")
+            }
+        }
+
+        describe("(-0.5, 0, 1)") {
+            it("should return 0 0 255") {
+                Color(-0.5, 0, 1).toRgb().should.equal("0 0 255")
+            }
+        }
+
+    }
+
 })

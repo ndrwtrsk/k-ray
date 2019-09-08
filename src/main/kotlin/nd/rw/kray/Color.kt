@@ -1,6 +1,6 @@
 package nd.rw.kray
 
-import kotlin.math.abs
+import kotlin.math.roundToInt
 
 class Color(val red: Double, val green: Double, val blue: Double) {
 
@@ -37,6 +37,14 @@ class Color(val red: Double, val green: Double, val blue: Double) {
             green = green * other.green,
             blue = blue * other.blue
         )
+    }
+
+    fun toRgb(): String {
+        val rgbRange = 0..255
+        val redValue = (red * 255).roundToInt().coerceIn(rgbRange)
+        val greenValue = (green * 255).roundToInt().coerceIn(rgbRange)
+        val blueValue = (blue * 255).roundToInt().coerceIn(rgbRange)
+        return "$redValue $greenValue $blueValue"
     }
 
     override fun toString(): String {
