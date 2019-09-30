@@ -11,9 +11,7 @@ class Canvas(val width: Int, val height: Int) {
         pixelGrid[y][x] = pixel
     }
 
-    fun pixelAt(x: Int, y: Int): Color {
-        return pixelGrid[y][x]
-    }
+    fun pixelAt(x: Int, y: Int): Color = pixelGrid[y][x]
 
     fun <EXPORT_TYPE> export(exporter: CanvasExporter<EXPORT_TYPE>) : EXPORT_TYPE {
         return exporter.export(this)
