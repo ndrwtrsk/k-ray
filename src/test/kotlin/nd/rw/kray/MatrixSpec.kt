@@ -7,7 +7,7 @@ import org.spekframework.spek2.style.specification.describe
 
 class MatrixSpec : Spek({
 
-    describe("constructing matricies") {
+    describe("constructing matrices") {
 
         describe("of") {
             val matrix = of(row(1, 2, 3), row(4, 5, 6), row(7, 8, 9))
@@ -22,6 +22,30 @@ class MatrixSpec : Spek({
                 matrix[2, 1].should.equal(8.0)
                 matrix[2, 2].should.equal(9.0)
             }
+        }
+
+    }
+
+    describe("operators") {
+
+        describe("equality with identical matrices") {
+            val a = of(row(1,2,3,4), row(5,6,7,8), row(9,8,7,6), row(5,4,3,2))
+            val b = of(row(1,2,3,4), row(5,6,7,8), row(9,8,7,6), row(5,4,3,2))
+
+            it("matrices are equal") {
+                (a == b).should.equal(true)
+            }
+
+        }
+
+        describe("equality with different matrices") {
+            val a = of(row(1,2,3,4), row(5,6,7,8), row(9,8,7,6), row(5,4,3,2))
+            val b = of(row(5,6,7,8), row(9,8,7,6), row(5,4,3,2), row(1,2,3,4))
+
+            it("matrices are not equal") {
+                (a != b).should.equal(true)
+            }
+
         }
 
     }
