@@ -7,7 +7,7 @@ class Matrix(private val values: List<List<Double>>) {
     companion object {
 
         @JvmStatic
-        fun of(vararg rows: Row): Matrix {
+        fun matrix(vararg rows: Row): Matrix {
             val map = rows.map { it.values.map { value -> value.toDouble() } }
             return Matrix(map)
         }
