@@ -1,31 +1,32 @@
 package nd.rw.kray
 
-data class Row(val values: List<Number>)
+data class Row(val values: List<Number>) {
+    constructor(vararg values: Number) : this(values.toList())
+}
 
-class Matrix(private val values: List<List<Double>>) {
+class Matrix(private val matrix: MutableList<MutableList<Double>> = arrayListOf()) {
+
+    operator fun Row.unaryPlus() {
+        matrix.add(this.values.map { it.toDouble() }.toMutableList())
+    }
 
     companion object {
-
         @JvmStatic
-        fun matrix(vararg rows: Row): Matrix {
-            val map = rows.map { it.values.map { value -> value.toDouble() } }
-            return Matrix(map)
-        }
-
-        @JvmStatic
-        fun row(vararg values: Number): Row {
-            return Row(values.toList())
+        fun matrix(init: Matrix.() -> Unit): Matrix {
+            val matrix = Matrix()
+            matrix.init()
+            return matrix;
         }
     }
 
     val numberOfRows: Int
-        get() = values.size
+        get() = matrix.size
 
     val numberOfColumns: Int
-        get() = values[0].size
+        get() = matrix[0].size
 
     operator fun get(row: Int, column: Int): Double {
-        return values[row][column]
+        return matrix[row][column]
     }
 
     override fun equals(other: Any?): Boolean {
@@ -39,7 +40,7 @@ class Matrix(private val values: List<List<Double>>) {
 
         var equal = true
 
-        this.values.forEachIndexed { i, columns ->
+        this.matrix.forEachIndexed { i, columns ->
             columns.forEachIndexed { j, value ->
                 equal = value.equalsWithMargin(other[i, j])
             }
@@ -49,8 +50,6 @@ class Matrix(private val values: List<List<Double>>) {
     }
 
     override fun hashCode(): Int {
-        return values.hashCode()
+        return matrix.hashCode()
     }
-
-
 }
