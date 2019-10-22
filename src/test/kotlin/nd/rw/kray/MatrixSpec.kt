@@ -74,50 +74,51 @@ class MatrixSpec : Spek({
 
         }
 
-        describe("multiplying matrices") {
-            val a = matrix {
-                +Row(1, 2, 3, 4)
-                +Row(5, 6, 7, 8)
-                +Row(9, 8, 7, 6)
-                +Row(5, 4, 3, 2)
+        describe("multiplication") {
+            describe("matrices") {
+                val a = matrix {
+                    +Row(1, 2, 3, 4)
+                    +Row(5, 6, 7, 8)
+                    +Row(9, 8, 7, 6)
+                    +Row(5, 4, 3, 2)
+                }
+
+                val b = matrix {
+                    +Row(-2, 1, 2, 3)
+                    +Row(3, 2, 1, -1)
+                    +Row(4, 3, 6, 5)
+                    +Row(1, 2, 7, 8)
+                }
+
+                it("a * b is the following matrix") {
+                    val result = a * b
+                    result.should.equal(
+                        matrix {
+                            +Row(20, 22, 50, 48)
+                            +Row(44, 54, 114, 108)
+                            +Row(40, 58, 110, 102)
+                            +Row(16, 26, 46, 42)
+                        }
+                    )
+                }
             }
 
-            val b = matrix {
-                +Row(-2, 1, 2, 3)
-                +Row(3, 2, 1, -1)
-                +Row(4, 3, 6, 5)
-                +Row(1, 2, 7, 8)
-            }
+            describe("matrix by tuple") {
+                val a = matrix {
+                    +Row(1, 2, 3, 4)
+                    +Row(2, 4, 4, 2)
+                    +Row(8, 6, 4, 1)
+                    +Row(0, 0, 0, 1)
+                }
 
-            it("a * b is the following matrix") {
-                val result = a * b
-                result.should.equal(
-                    matrix {
-                        +Row(20, 22, 50, 48)
-                        +Row(44, 54, 114, 108)
-                        +Row(40, 58, 110, 102)
-                        +Row(16, 26, 46, 42)
-                    }
-                )
+                val b = Tuple(1, 2, 3, 1)
+
+                it("a * b is a following tuple") {
+                    val result = a * b
+                    result.should.equal(Tuple(18, 24, 33, 1))
+                }
             }
         }
-
-        describe("multiplying by tuple") {
-            val a = matrix {
-                +Row(1, 2, 3, 4)
-                +Row(2, 4, 4, 2)
-                +Row(8, 6, 4, 1)
-                +Row(0, 0, 0, 1)
-            }
-
-            val b = Tuple(1,2,3,1)
-
-            it("a * b is a following tuple") {
-                val result = a * b
-                result.should.equal(Tuple(18,24,33,1))
-            }
-        }
-
     }
 
 })
