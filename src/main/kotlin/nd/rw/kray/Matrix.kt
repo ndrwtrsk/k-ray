@@ -55,6 +55,13 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
     val determinant: Double
         get() = this[0,0] * this[1,1] - this[0,1] * this[1,0]
 
+    fun submatrix(row: Int, column: Int) : Matrix {
+        val copiedMatrix = matrix.map { it.toMutableList() }.toMutableList()
+        copiedMatrix.removeAt(row)
+        copiedMatrix.forEach { it.removeAt(column) }
+        return Matrix(copiedMatrix)
+    }
+
     operator fun times(other: Matrix): Matrix {
         val result = MutableMatrix(4, 4)
         for (i in 0 until 4) {

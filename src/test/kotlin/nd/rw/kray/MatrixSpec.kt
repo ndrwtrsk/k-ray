@@ -178,4 +178,56 @@ class MatrixSpec : Spek({
         }
     }
 
+    describe("submatrix") {
+        describe("A submatrix of 3x3 matrix is a 2x2 matrix") {
+            val a = matrix {
+                +Row(1, 5, 0)
+                +Row(-3, 2, 7)
+                +Row(0, 6, -3)
+            }
+
+            val result = a.submatrix(0, 2)
+
+            it("submatrix at (0,2) is the following 2x2 matrix") {
+                result.should.equal(
+                    matrix {
+                        +Row(-3, 2)
+                        +Row(0, 6)
+                    }
+                )
+            }
+
+            it("original matrix preserved it's state") {
+                a.numberOfColumns.should.equal(3)
+                a.numberOfRows.should.equal(3)
+            }
+        }
+
+        describe("A submatrix of 4x4 matrix is a 3x3 matrix") {
+            val a = matrix {
+                +Row(-6, 1, 1, 6)
+                +Row(-8, 5, 8, 6)
+                +Row(-1, 0, 8, 2)
+                +Row(-7, -1, -1, 1)
+            }
+
+            val result = a.submatrix(2, 1)
+
+            it("submatrix at (2,1) is the following 3x3 matrix") {
+                result.should.equal(
+                    matrix {
+                        +Row(-6, 1, 6)
+                        +Row(-8, 8, 6)
+                        +Row(-7, -1, 1)
+                    }
+                )
+            }
+
+            it("original matrix preserved it's state") {
+                a.numberOfColumns.should.equal(4)
+                a.numberOfRows.should.equal(4)
+            }
+        }
+    }
+
 })
