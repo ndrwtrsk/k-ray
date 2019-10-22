@@ -7,6 +7,9 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
     constructor(x: Number, y: Number, z: Number, w: Number)
             : this(x.toDouble(), y.toDouble(), z.toDouble(), w.toDouble())
 
+    constructor(tupleAsList: List<Number>)
+            : this(tupleAsList[0], tupleAsList[1], tupleAsList[2], tupleAsList[3])
+
     companion object {
 
         @JvmStatic
@@ -44,6 +47,15 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
             )
         }
 
+    private val asList: List<Double>
+        get() {
+            return listOf(x, y, z, w)
+        }
+
+    operator fun get(i: Int): Double {
+        //todo find a way to memoize this stuff?
+        return asList[i]
+    }
 
     operator fun plus(other: Tuple): Tuple {
         return Tuple(

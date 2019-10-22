@@ -1,10 +1,10 @@
 package nd.rw.kray
 
+import com.winterbe.expekt.should
 import nd.rw.kray.Tuple.Companion.point
+import nd.rw.kray.Tuple.Companion.vector
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import com.winterbe.expekt.should
-import nd.rw.kray.Tuple.Companion.vector
 import kotlin.math.sqrt
 
 object TupleSpec : Spek({
@@ -24,6 +24,23 @@ object TupleSpec : Spek({
                 point.isVector.should.be.`true`
                 point.isPoint.should.be.`false`
             }
+        }
+
+        describe("from a list of values") {
+            val tuple = Tuple(listOf(1,2,3,4))
+            it("is a correct tuple") {
+                tuple.should.equal(Tuple(1,2,3,4))
+            }
+        }
+    }
+
+    describe("indexing operator") {
+        val tuple = Tuple(1,2,3,4)
+        it("values are correctly indexed") {
+            tuple[0].should.equal(1.0)
+            tuple[1].should.equal(2.0)
+            tuple[2].should.equal(3.0)
+            tuple[3].should.equal(4.0)
         }
     }
 
