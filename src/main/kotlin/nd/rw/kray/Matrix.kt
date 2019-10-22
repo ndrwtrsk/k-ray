@@ -4,7 +4,7 @@ data class Row(val values: List<Number>) {
     constructor(vararg values: Number) : this(values.toList())
 }
 
-class Matrix(private val matrix: MutableList<MutableList<Double>> = arrayListOf()) {
+open class Matrix(protected val matrix: MutableList<MutableList<Double>> = arrayListOf()) {
 
     operator fun Row.unaryPlus() {
         matrix.add(this.values.map { it.toDouble() }.toMutableList())
@@ -19,11 +19,33 @@ class Matrix(private val matrix: MutableList<MutableList<Double>> = arrayListOf(
         }
     }
 
+    private class MutableMatrix(rows: Int, columns: Int) : Matrix(MutableList(rows) { MutableList(columns) { 0.0 } }) {
+
+        operator fun set(row: Int, column: Int, value: Number) {
+            this.matrix[row][column] = value.toDouble()
+        }
+    }
+
     val numberOfRows: Int
         get() = matrix.size
 
     val numberOfColumns: Int
         get() = matrix[0].size
+
+    operator fun times(other: Matrix): Matrix {
+        // todo add check for feasibility of multiplication
+        val rowsToIterate = this.numberOfRows
+        val columnsToIterate = other.numberOfColumns
+        val result = MutableMatrix(rowsToIterate, columnsToIterate)
+        for (i in 0 until rowsToIterate) {
+            for (j in 0 until columnsToIterate) {
+                for (k in 0 until this.numberOfColumns) {
+                    result[i, j] += this[i, k] * other[k, j]
+                }
+            }
+        }
+        return result
+    }
 
     operator fun get(row: Int, column: Int): Double {
         return matrix[row][column]
