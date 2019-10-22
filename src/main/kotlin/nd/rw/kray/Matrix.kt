@@ -31,9 +31,8 @@ class Matrix(private val matrix: MutableList<MutableList<Double>> = arrayListOf(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Matrix
+        if (other === null) return false
+        if (other !is Matrix) return false
 
         if (this.numberOfRows != other.numberOfRows) return false
         if (this.numberOfColumns != other.numberOfColumns) return false
@@ -51,5 +50,9 @@ class Matrix(private val matrix: MutableList<MutableList<Double>> = arrayListOf(
 
     override fun hashCode(): Int {
         return matrix.hashCode()
+    }
+
+    override fun toString(): String {
+        return matrix.joinToString(separator = "\n") { it.toString() }
     }
 }
