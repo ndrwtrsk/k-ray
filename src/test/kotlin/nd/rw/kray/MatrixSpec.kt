@@ -1,6 +1,7 @@
 import com.winterbe.expekt.should
 import nd.rw.kray.Matrix.Companion.matrix
 import nd.rw.kray.Row
+import nd.rw.kray.Tuple
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
@@ -98,6 +99,22 @@ class MatrixSpec : Spek({
                         +Row(16, 26, 46, 42)
                     }
                 )
+            }
+        }
+
+        describe("multiplying by tuple") {
+            val a = matrix {
+                +Row(1, 2, 3, 4)
+                +Row(2, 4, 4, 2)
+                +Row(8, 6, 4, 1)
+                +Row(0, 0, 0, 1)
+            }
+
+            val b = Tuple(1,2,3,1)
+
+            it("a * b is a following tuple") {
+                val result = a * b
+                result.should.equal(Tuple(18,24,33,1))
             }
         }
 

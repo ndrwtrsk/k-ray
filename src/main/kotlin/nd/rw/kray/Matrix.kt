@@ -33,18 +33,25 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         get() = matrix[0].size
 
     operator fun times(other: Matrix): Matrix {
-        // todo add check for feasibility of multiplication
-        val rowsToIterate = this.numberOfRows
-        val columnsToIterate = other.numberOfColumns
-        val result = MutableMatrix(rowsToIterate, columnsToIterate)
-        for (i in 0 until rowsToIterate) {
-            for (j in 0 until columnsToIterate) {
-                for (k in 0 until this.numberOfColumns) {
+        val result = MutableMatrix(4, 4)
+        for (i in 0 until 4) {
+            for (j in 0 until 4) {
+                for (k in 0 until 4) {
                     result[i, j] += this[i, k] * other[k, j]
                 }
             }
         }
         return result
+    }
+
+    operator fun times(tuple: Tuple): Tuple {
+        val resultTuple = MutableList(4) { 0.0 }
+        for (i in 0 until 4) {
+            for (j in 0 until 4) {
+                resultTuple[i] += this[i,j] * tuple[j]
+            }
+        }
+        return Tuple(resultTuple)
     }
 
     operator fun get(row: Int, column: Int): Double {
