@@ -135,7 +135,7 @@ class MatrixSpec : Spek({
             }
 
             describe("tuple by identity matrix") {
-                val a = Tuple(1,2,3,4)
+                val a = Tuple(1, 2, 3, 4)
 
                 it("yields the same tuple") {
                     val result = identityMatrix() * a
@@ -148,24 +148,34 @@ class MatrixSpec : Spek({
 
     describe("transposing") {
         val a = matrix {
-            +Row(0,9,3,0)
-            +Row(9,8,0,0)
-            +Row(1,8,5,3)
-            +Row(0,0,5,8)
+            +Row(0, 9, 3, 0)
+            +Row(9, 8, 0, 0)
+            +Row(1, 8, 5, 3)
+            +Row(0, 0, 5, 8)
         }
 
         it("yields transposed matrix") {
             val transposed = a.transpose
             transposed.should.equal(
                 matrix {
-                    +Row(0,9,1,0)
-                    +Row(9,8,8,0)
-                    +Row(3,0,5,5)
-                    +Row(0,0,3,8)
+                    +Row(0, 9, 1, 0)
+                    +Row(9, 8, 8, 0)
+                    +Row(3, 0, 5, 5)
+                    +Row(0, 0, 3, 8)
                 }
             )
         }
 
+    }
+
+    describe("determinant") {
+        val a = matrix {
+            +Row(1, 5)
+            +Row(-3, 2)
+        }
+        it("computes determinant correctly") {
+            a.determinant.should.equal(17.0)
+        }
     }
 
 })

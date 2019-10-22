@@ -46,11 +46,14 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             val result = MutableMatrix(4, 4)
             for (i in 0 until 4) {
                 for (j in 0 until 4) {
-                    result[j,i] = this[i, j]
+                    result[j, i] = this[i, j]
                 }
             }
             return result
         }
+
+    val determinant: Double
+        get() = this[0,0] * this[1,1] - this[0,1] * this[1,0]
 
     operator fun times(other: Matrix): Matrix {
         val result = MutableMatrix(4, 4)
