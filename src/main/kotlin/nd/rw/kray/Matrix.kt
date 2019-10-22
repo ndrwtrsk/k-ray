@@ -17,6 +17,15 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             matrix.init()
             return matrix;
         }
+
+        fun identityMatrix(): Matrix {
+            return matrix {
+                +Row(1, 0, 0, 0)
+                +Row(0, 1, 0, 0)
+                +Row(0, 0, 1, 0)
+                +Row(0, 0, 0, 1)
+            }
+        }
     }
 
     private class MutableMatrix(rows: Int, columns: Int) : Matrix(MutableList(rows) { MutableList(columns) { 0.0 } }) {
@@ -48,7 +57,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         val resultTuple = MutableList(4) { 0.0 }
         for (i in 0 until 4) {
             for (j in 0 until 4) {
-                resultTuple[i] += this[i,j] * tuple[j]
+                resultTuple[i] += this[i, j] * tuple[j]
             }
         }
         return Tuple(resultTuple)

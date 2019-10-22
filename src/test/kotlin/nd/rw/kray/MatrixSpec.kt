@@ -1,4 +1,5 @@
 import com.winterbe.expekt.should
+import nd.rw.kray.Matrix.Companion.identityMatrix
 import nd.rw.kray.Matrix.Companion.matrix
 import nd.rw.kray.Row
 import nd.rw.kray.Tuple
@@ -116,6 +117,29 @@ class MatrixSpec : Spek({
                 it("a * b is a following tuple") {
                     val result = a * b
                     result.should.equal(Tuple(18, 24, 33, 1))
+                }
+            }
+
+            describe("matrix by identity matrix") {
+                val a = matrix {
+                    +Row(1, 2, 3, 4)
+                    +Row(5, 6, 7, 8)
+                    +Row(9, 8, 7, 6)
+                    +Row(5, 4, 3, 2)
+                }
+
+                it("yields the same matrix") {
+                    val result = a * identityMatrix()
+                    result.should.equal(a)
+                }
+            }
+
+            describe("tuple by identity matrix") {
+                val a = Tuple(1,2,3,4)
+
+                it("yields the same tuple") {
+                    val result = identityMatrix() * a
+                    result.should.equal(a)
                 }
             }
         }
