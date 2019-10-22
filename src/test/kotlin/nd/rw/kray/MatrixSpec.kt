@@ -143,6 +143,29 @@ class MatrixSpec : Spek({
                 }
             }
         }
+
+    }
+
+    describe("transposing") {
+        val a = matrix {
+            +Row(0,9,3,0)
+            +Row(9,8,0,0)
+            +Row(1,8,5,3)
+            +Row(0,0,5,8)
+        }
+
+        it("yields transposed matrix") {
+            val transposed = a.transpose
+            transposed.should.equal(
+                matrix {
+                    +Row(0,9,1,0)
+                    +Row(9,8,8,0)
+                    +Row(3,0,5,5)
+                    +Row(0,0,3,8)
+                }
+            )
+        }
+
     }
 
 })

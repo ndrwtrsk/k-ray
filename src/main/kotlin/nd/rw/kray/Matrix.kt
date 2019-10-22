@@ -41,6 +41,17 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
     val numberOfColumns: Int
         get() = matrix[0].size
 
+    val transpose: Matrix
+        get() {
+            val result = MutableMatrix(4, 4)
+            for (i in 0 until 4) {
+                for (j in 0 until 4) {
+                    result[j,i] = this[i, j]
+                }
+            }
+            return result
+        }
+
     operator fun times(other: Matrix): Matrix {
         val result = MutableMatrix(4, 4)
         for (i in 0 until 4) {
