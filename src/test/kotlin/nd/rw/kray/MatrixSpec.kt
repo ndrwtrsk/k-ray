@@ -169,13 +169,69 @@ class MatrixSpec : Spek({
     }
 
     describe("determinant") {
-        val a = matrix {
-            +Row(1, 5)
-            +Row(-3, 2)
+        describe("determinant of 2x2 matrix") {
+            val a = matrix {
+                +Row(1, 5)
+                +Row(-3, 2)
+            }
+            it("computes determinant correctly") {
+                a.determinant.should.equal(17.0)
+            }
         }
-        it("computes determinant correctly") {
-            a.determinant.should.equal(17.0)
+
+        describe("determinant of 3x3 matrix") {
+            val a = matrix {
+                +Row(1, 2, 6)
+                +Row(-5, 8, -4)
+                +Row(2, 6, 4)
+            }
+
+            it("cofactor of a at (0,0) is 56") {
+                a.cofactor(0,0).should.equal(56.0)
+            }
+
+            it("cofactor of a at (0,1) is 12") {
+                a.cofactor(0,1).should.equal(12.0)
+            }
+
+            it("cofactor of a at (0,2) is -46") {
+                a.cofactor(0,2).should.equal(-46.0)
+            }
+
+            it("determinant of a is -196") {
+                a.determinant.should.equal(-196.0)
+            }
         }
+
+        describe("determinant of 4x4 matrix") {
+            val a = matrix {
+                +Row(-2, -8, 3, 5)
+                +Row(-3, 1, 7, 3)
+                +Row(1, 2, -9, 6)
+                +Row(-6, 7, 7, -9)
+            }
+
+            it("cofactor of a at (0,0) is 690") {
+                a.cofactor(0,0).should.equal(690.0)
+            }
+
+            it("cofactor of a at (0,1) is 447") {
+                a.cofactor(0,1).should.equal(447.0)
+            }
+
+            it("cofactor of a at (0,2) is 210") {
+                a.cofactor(0,2).should.equal(210.0)
+            }
+
+            it("cofactor of a at (0,3) is 51") {
+                a.cofactor(0,3).should.equal(51.0)
+            }
+
+            it("determinant of a is -4071") {
+                a.determinant.should.equal(-4071.0)
+            }
+        }
+
     }
 
     describe("submatrix") {
@@ -256,19 +312,19 @@ class MatrixSpec : Spek({
         }
 
         it("minor of a at (0,0) is -12") {
-            a.minor(0,0).should.equal(-12.0)
+            a.minor(0, 0).should.equal(-12.0)
         }
 
         it("cofactor of a at (0,0) is -12 too") {
-            a.cofactor(0,0).should.equal(-12.0)
+            a.cofactor(0, 0).should.equal(-12.0)
         }
 
         it("minor of a at (1,0) is 25") {
-            a.minor(1,0).should.equal(25.0)
+            a.minor(1, 0).should.equal(25.0)
         }
 
         it("cofactor of a at (1,0) is same as minor at same point, but sign reversed") {
-            a.cofactor(1,0).should.equal(-25.0)
+            a.cofactor(1, 0).should.equal(-25.0)
         }
     }
 

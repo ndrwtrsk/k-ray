@@ -41,6 +41,9 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
     val numberOfColumns: Int
         get() = matrix[0].size
 
+    val size: Int
+        get() = matrix.size
+
     val transpose: Matrix
         get() {
             val result = MutableMatrix(4, 4)
@@ -53,7 +56,16 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         }
 
     val determinant: Double
-        get() = this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0]
+        get() {
+            if (size == 2) {
+                return this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0]
+            }
+            var determinant = 0.0
+            for (column in 0 until size) {
+                determinant += this[0, column] * cofactor(0, column)
+            }
+            return determinant
+        }
 
     fun submatrix(row: Int, column: Int): Matrix {
         val copiedMatrix = matrix.map { it.toMutableList() }.toMutableList()
