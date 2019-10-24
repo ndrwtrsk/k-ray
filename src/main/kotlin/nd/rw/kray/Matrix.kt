@@ -62,6 +62,10 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         return Matrix(copiedMatrix)
     }
 
+    fun minor(row: Int, column: Int) : Double {
+        return submatrix(row, column).determinant
+    }
+
     operator fun times(other: Matrix): Matrix {
         val result = MutableMatrix(4, 4)
         for (i in 0 until 4) {

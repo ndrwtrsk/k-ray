@@ -230,4 +230,22 @@ class MatrixSpec : Spek({
         }
     }
 
+    describe("minor") {
+        val a = matrix {
+            +Row(3,5,0)
+            +Row(2,-1,-7)
+            +Row(6,-1,5)
+        }
+
+        val b = a.submatrix(1, 0)
+
+        it("determinant of b is 25") {
+            b.determinant.should.equal(25.0)
+        }
+
+        it("minor of a at (1,0) is 25 too") {
+            a.minor(1,0).should.equal(25.0)
+        }
+    }
+
 })
