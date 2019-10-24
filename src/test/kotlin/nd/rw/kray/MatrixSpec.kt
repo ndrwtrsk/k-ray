@@ -232,9 +232,9 @@ class MatrixSpec : Spek({
 
     describe("minor") {
         val a = matrix {
-            +Row(3,5,0)
-            +Row(2,-1,-7)
-            +Row(6,-1,5)
+            +Row(3, 5, 0)
+            +Row(2, -1, -7)
+            +Row(6, -1, 5)
         }
 
         val b = a.submatrix(1, 0)
@@ -244,7 +244,31 @@ class MatrixSpec : Spek({
         }
 
         it("minor of a at (1,0) is 25 too") {
+            a.minor(1, 0).should.equal(25.0)
+        }
+    }
+
+    describe("cofactor") {
+        val a = matrix {
+            +Row(3, 5, 0)
+            +Row(2, -1, -7)
+            +Row(6, -1, 5)
+        }
+
+        it("minor of a at (0,0) is -12") {
+            a.minor(0,0).should.equal(-12.0)
+        }
+
+        it("cofactor of a at (0,0) is -12 too") {
+            a.cofactor(0,0).should.equal(-12.0)
+        }
+
+        it("minor of a at (1,0) is 25") {
             a.minor(1,0).should.equal(25.0)
+        }
+
+        it("cofactor of a at (1,0) is same as minor at same point, but sign reversed") {
+            a.cofactor(1,0).should.equal(-25.0)
         }
     }
 

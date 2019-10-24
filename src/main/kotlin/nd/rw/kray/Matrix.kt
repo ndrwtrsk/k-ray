@@ -53,17 +53,22 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         }
 
     val determinant: Double
-        get() = this[0,0] * this[1,1] - this[0,1] * this[1,0]
+        get() = this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0]
 
-    fun submatrix(row: Int, column: Int) : Matrix {
+    fun submatrix(row: Int, column: Int): Matrix {
         val copiedMatrix = matrix.map { it.toMutableList() }.toMutableList()
         copiedMatrix.removeAt(row)
         copiedMatrix.forEach { it.removeAt(column) }
         return Matrix(copiedMatrix)
     }
 
-    fun minor(row: Int, column: Int) : Double {
+    fun minor(row: Int, column: Int): Double {
         return submatrix(row, column).determinant
+    }
+
+    fun cofactor(row: Int, column: Int): Double {
+        val isEven = (row + column) % 2 == 0
+        return minor(row, column) * if (isEven) 1.0 else -1.0
     }
 
     operator fun times(other: Matrix): Matrix {
