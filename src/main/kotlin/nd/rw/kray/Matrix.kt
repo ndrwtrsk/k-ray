@@ -57,6 +57,16 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
                 +Row(0, 0, 0, 1)
             }
         }
+
+        fun rotationAroundY(radiansAsNumber: Number): Matrix {
+            val radians = radiansAsNumber.toDouble()
+            return matrix {
+                +Row(cos(radians), 0, sin(radians), 0)
+                +Row(0, 1, 0, 0)
+                +Row(-sin(radians), 0, cos(radians), 0)
+                +Row(0, 0, 0, 1)
+            }
+        }
     }
 
     private class MutableMatrix(rows: Int, columns: Int) : Matrix(MutableList(rows) { MutableList(columns) { 0.0 } }) {

@@ -2,6 +2,7 @@ package nd.rw.kray
 
 import com.winterbe.expekt.should
 import nd.rw.kray.Matrix.Companion.rotationAroundX
+import nd.rw.kray.Matrix.Companion.rotationAroundY
 import nd.rw.kray.Matrix.Companion.scaling
 import nd.rw.kray.Matrix.Companion.translation
 import nd.rw.kray.Tuple.Companion.point
@@ -91,6 +92,20 @@ class TransformationsSpec : Spek({
             val fullQuarter = rotationAroundX(PI / 2)
             it("rotating point by full quarter should place on z axis") {
                 (fullQuarter * p).should.equal(point(0, 0, 1))
+            }
+        }
+
+        describe("around y axis") {
+            val p = point(0, 0, 1)
+
+            val halfQuarter = rotationAroundY(PI / 4)
+            it("rotating point by half quarter should place it at 45 degrees") {
+                (halfQuarter * p).should.equal(point(sqrt(2.0) / 2.0, 0, sqrt(2.0) / 2.0))
+            }
+
+            val fullQuarter = rotationAroundY(PI / 2)
+            it("rotating point by full quarter should place on x axis") {
+                (fullQuarter * p).should.equal(point(1, 0, 0))
             }
         }
     }
