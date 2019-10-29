@@ -26,6 +26,15 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
                 +Row(0, 0, 0, 1)
             }
         }
+
+        fun translation(x: Int, y: Int, z: Int): Matrix {
+            return matrix {
+                +Row(1, 0, 0, x)
+                +Row(0, 1, 0, y)
+                +Row(0, 0, 1, z)
+                +Row(0, 0, 0, 1)
+            }
+        }
     }
 
     private class MutableMatrix(rows: Int, columns: Int) : Matrix(MutableList(rows) { MutableList(columns) { 0.0 } }) {
