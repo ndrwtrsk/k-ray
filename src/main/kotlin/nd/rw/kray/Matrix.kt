@@ -35,6 +35,24 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         }
     }
 
+    val inverted: Matrix
+        get() {
+            if (!isInvertible) throw Exception("matrix is not invertible!")
+
+            val inverted = MutableMatrix(this.numberOfRows, this.numberOfColumns)
+            for (row in 0 until size) {
+                for (col in 0 until size) {
+                    inverted[col, row] = cofactor(row, col) / determinant
+                }
+            }
+            return inverted
+        }
+
+    val isInvertible: Boolean
+        get() {
+            return !determinant.equalsWithMargin(0.0)
+        }
+
     val numberOfRows: Int
         get() = matrix.size
 

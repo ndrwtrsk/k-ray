@@ -187,15 +187,15 @@ class MatrixSpec : Spek({
             }
 
             it("cofactor of a at (0,0) is 56") {
-                a.cofactor(0,0).should.equal(56.0)
+                a.cofactor(0, 0).should.equal(56.0)
             }
 
             it("cofactor of a at (0,1) is 12") {
-                a.cofactor(0,1).should.equal(12.0)
+                a.cofactor(0, 1).should.equal(12.0)
             }
 
             it("cofactor of a at (0,2) is -46") {
-                a.cofactor(0,2).should.equal(-46.0)
+                a.cofactor(0, 2).should.equal(-46.0)
             }
 
             it("determinant of a is -196") {
@@ -212,19 +212,19 @@ class MatrixSpec : Spek({
             }
 
             it("cofactor of a at (0,0) is 690") {
-                a.cofactor(0,0).should.equal(690.0)
+                a.cofactor(0, 0).should.equal(690.0)
             }
 
             it("cofactor of a at (0,1) is 447") {
-                a.cofactor(0,1).should.equal(447.0)
+                a.cofactor(0, 1).should.equal(447.0)
             }
 
             it("cofactor of a at (0,2) is 210") {
-                a.cofactor(0,2).should.equal(210.0)
+                a.cofactor(0, 2).should.equal(210.0)
             }
 
             it("cofactor of a at (0,3) is 51") {
-                a.cofactor(0,3).should.equal(51.0)
+                a.cofactor(0, 3).should.equal(51.0)
             }
 
             it("determinant of a is -4071") {
@@ -325,6 +325,93 @@ class MatrixSpec : Spek({
 
         it("cofactor of a at (1,0) is same as minor at same point, but sign reversed") {
             a.cofactor(1, 0).should.equal(-25.0)
+        }
+    }
+
+    describe("inversion") {
+        describe("testing an invertibile matrix for invertibility") {
+            val a = matrix {
+                +Row(6, 4, 4, 4)
+                +Row(5, 5, 7, 6)
+                +Row(4, -9, 3, -7)
+                +Row(9, 1, 7, -6)
+            }
+
+            it("matrix is invertible") {
+                a.isInvertible.should.equal(true)
+            }
+        }
+
+        describe("testing a noninvertibile matrix for invertibility") {
+            val a = matrix {
+                +Row(-4, 2, -2, -3)
+                +Row(9, 6, 2, 6)
+                +Row(0, -5, 1, -5)
+                +Row(0, 0, 0, 0)
+            }
+
+            it("matrix is not invertible") {
+                a.isInvertible.should.equal(false)
+            }
+        }
+
+        describe("inversion") {
+
+            describe("of matrix - 1") {
+                val a = matrix {
+                    +Row(-5, 2, 6, -8)
+                    +Row(1, -5, 1, 8)
+                    +Row(7, 7, -6, -7)
+                    +Row(1, -3, 7, 4)
+                }
+
+                val b = a.inverted
+
+                it("b(3,2) is cofactor of a(2,3) / determinant of a") {
+                    a.determinant.should.equal(532.0)
+                    a.cofactor(2, 3).should.equal(-160.0)
+                    b[3, 2].should.equal(-160.0 / 532.0)
+                }
+
+                it("b(2,3) is cofactor of a(3,2) / determinant of a") {
+                    a.determinant.should.equal(532.0)
+                    a.cofactor(3, 2).should.equal(105.0)
+                    b[2, 3].should.equal(105.0 / 532.0)
+                }
+
+                it("b is the following inversion of a") {
+                    b.should.equal(
+                        matrix {
+                            +Row(0.21805, 0.45113, 0.24060, -0.04511)
+                            +Row(-0.80827, -1.45677, -0.44361, 0.52068)
+                            +Row(-0.07895, -0.22368, -0.05263, 0.19737)
+                            +Row(-0.52256, -0.81391, -0.30075, 0.30639)
+                        }
+                    )
+                }
+            }
+
+            describe("of matrix - 2") {
+                val a = matrix {
+                    +Row(8, -5, 9, 2)
+                    +Row(7, 5, 6, 1)
+                    +Row(-6, 0, 9, 6)
+                    +Row(-3, 0, -9, -4)
+                }
+
+                val b = a.inverted
+
+                it("b is the following inversion of a") {
+                    b.should.equal(
+                        matrix {
+                            +Row(-0.15385, -0.15385, -0.28205, -0.53846)
+                            +Row(-0.07692, 0.12308, 0.02564, 0.03077)
+                            +Row(0.35897, 0.35897, 0.43590, 0.92308)
+                            +Row(-0.69231, -0.69231, 0.76923, -1.92308)
+                        }
+                    )
+                }
+            }
         }
     }
 
