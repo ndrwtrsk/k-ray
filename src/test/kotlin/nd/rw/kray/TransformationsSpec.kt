@@ -1,12 +1,15 @@
 package nd.rw.kray
 
 import com.winterbe.expekt.should
+import nd.rw.kray.Matrix.Companion.rotationAroundX
 import nd.rw.kray.Matrix.Companion.scaling
 import nd.rw.kray.Matrix.Companion.translation
 import nd.rw.kray.Tuple.Companion.point
 import nd.rw.kray.Tuple.Companion.vector
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
+import kotlin.math.PI
+import kotlin.math.sqrt
 
 class TransformationsSpec : Spek({
 
@@ -58,7 +61,7 @@ class TransformationsSpec : Spek({
         }
 
         describe("shrinking by applying inverse matrix to scaling matrix") {
-            val shrinking = scaling(2,3,4).inverted
+            val shrinking = scaling(2, 3, 4).inverted
             val v = vector(-4, 6, 8)
 
             it("vector is shrinked") {
@@ -68,13 +71,27 @@ class TransformationsSpec : Spek({
 
         describe("reflection is scaling by a negative value") {
             val reflection = scaling(-1, 1, 1)
-            val p = point(2,3,4)
+            val p = point(2, 3, 4)
 
             it("point is on the other side of x axis") {
-                (reflection * p).should.equal(point(-2,3,4))
+                (reflection * p).should.equal(point(-2, 3, 4))
             }
         }
     }
 
+    describe("rotation") {
+        describe("around x axis") {
+            val p = point(0, 1, 0)
 
+            val halfQuarter = rotationAroundX(PI / 4)
+            it("rotating point by half quarter should place it at 45 degrees") {
+                (halfQuarter * p).should.equal(point(0, sqrt(2.0) / 2.0, sqrt(2.0) / 2.0))
+            }
+
+            val fullQuarter = rotationAroundX(PI / 2)
+            it("rotating point by full quarter should place on z axis") {
+                (fullQuarter * p).should.equal(point(0, 0, 1))
+            }
+        }
+    }
 })

@@ -1,5 +1,8 @@
 package nd.rw.kray
 
+import kotlin.math.cos
+import kotlin.math.sin
+
 data class Row(val values: List<Number>) {
     constructor(vararg values: Number) : this(values.toList())
 }
@@ -41,6 +44,16 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
                 +Row(x, 0, 0, 0)
                 +Row(0, y, 0, 0)
                 +Row(0, 0, z, 0)
+                +Row(0, 0, 0, 1)
+            }
+        }
+
+        fun rotationAroundX(radiansAsNumber: Number): Matrix {
+            val radians = radiansAsNumber.toDouble()
+            return matrix {
+                +Row(1, 0, 0, 0)
+                +Row(0, cos(radians), -sin(radians), 0)
+                +Row(0, sin(radians), cos(radians), 0)
                 +Row(0, 0, 0, 1)
             }
         }

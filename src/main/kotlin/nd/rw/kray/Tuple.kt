@@ -123,10 +123,10 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
 
         other as Tuple
 
-        return this.x == other.x
-                && this.y == other.y
-                && this.z == other.z
-                && this.w == other.w
+        return this.x.equalsWithMargin(other.x)
+                && this.y.equalsWithMargin(other.y)
+                && this.z.equalsWithMargin(other.z)
+                && this.w.equalsWithMargin(other.w)
     }
 
     override fun toString(): String {
