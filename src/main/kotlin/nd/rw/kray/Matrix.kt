@@ -35,6 +35,15 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
                 +Row(0, 0, 0, 1)
             }
         }
+
+        fun scaling(x: Int, y: Int, z: Int): Matrix {
+            return matrix {
+                +Row(x, 0, 0, 0)
+                +Row(0, y, 0, 0)
+                +Row(0, 0, z, 0)
+                +Row(0, 0, 0, 1)
+            }
+        }
     }
 
     private class MutableMatrix(rows: Int, columns: Int) : Matrix(MutableList(rows) { MutableList(columns) { 0.0 } }) {
