@@ -77,6 +77,19 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
                 +Row(0, 0, 0, 1)
             }
         }
+
+        fun shearing(
+            xToY: Number, xToZ: Number,
+            yToX: Number, yToZ: Number,
+            zToX: Number, zToY: Number
+        ): Matrix {
+            return matrix {
+                +Row(1, xToY, xToZ, 0)
+                +Row(yToX, 1, yToZ, 0)
+                +Row(zToX, zToY, 1, 0)
+                +Row(0, 0, 0, 1)
+            }
+        }
     }
 
     private class MutableMatrix(rows: Int, columns: Int) : Matrix(MutableList(rows) { MutableList(columns) { 0.0 } }) {

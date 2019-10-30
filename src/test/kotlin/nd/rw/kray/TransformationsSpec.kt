@@ -5,6 +5,7 @@ import nd.rw.kray.Matrix.Companion.rotationAroundX
 import nd.rw.kray.Matrix.Companion.rotationAroundY
 import nd.rw.kray.Matrix.Companion.rotationAroundZ
 import nd.rw.kray.Matrix.Companion.scaling
+import nd.rw.kray.Matrix.Companion.shearing
 import nd.rw.kray.Matrix.Companion.translation
 import nd.rw.kray.Tuple.Companion.point
 import nd.rw.kray.Tuple.Companion.vector
@@ -121,6 +122,62 @@ class TransformationsSpec : Spek({
             val fullQuarter = rotationAroundZ(PI / 2)
             it("rotating point by full quarter should place on x axis") {
                 (fullQuarter * p).should.equal(point(-1, 0, 0))
+            }
+        }
+    }
+
+    describe("shearing") {
+        describe("a shearing transformation moves x in proportion to y") {
+            val shearing = shearing(1, 0, 0, 0, 0, 0)
+            val p = point(2, 3, 4)
+
+            it("x should be moved in proportion 1 times y (3) to 5") {
+                (shearing * p).should.equal(point(5, 3, 4))
+            }
+        }
+
+        describe("a shearing transformation moves x in proportion to z") {
+            val shearing = shearing(0, 1, 0, 0, 0, 0)
+            val p = point(2, 3, 4)
+
+            it("x should be moved in proportion 1 times z (4) to 6") {
+                (shearing * p).should.equal(point(6, 3, 4))
+            }
+        }
+
+        describe("a shearing transformation moves y in proportion to x") {
+            val shearing = shearing(0, 0, 1, 0, 0, 0)
+            val p = point(2, 3, 4)
+
+            it("y should be moved in proportion 1 times x (2) to 5") {
+                (shearing * p).should.equal(point(2, 5, 4))
+            }
+        }
+
+        describe("a shearing transformation moves y in proportion to z") {
+            val shearing = shearing(0, 0, 0, 1, 0, 0)
+            val p = point(2, 3, 4)
+
+            it("y should be moved in proportion 1 times z (4) to 7") {
+                (shearing * p).should.equal(point(2, 7, 4))
+            }
+        }
+
+        describe("a shearing transformation moves z in proportion to x") {
+            val shearing = shearing(0, 0, 0, 0, 1, 0)
+            val p = point(2, 3, 4)
+
+            it("z should be moved in proportion 1 times x (2) to 6") {
+                (shearing * p).should.equal(point(2, 3, 6))
+            }
+        }
+
+        describe("a shearing transformation moves z in proportion to y") {
+            val shearing = shearing(0, 0, 0, 0, 0, 1)
+            val p = point(2, 3, 4)
+
+            it("z should be moved in proportion 1 times y (3) to 7") {
+                (shearing * p).should.equal(point(2, 3, 7))
             }
         }
     }
