@@ -181,4 +181,44 @@ class TransformationsSpec : Spek({
             }
         }
     }
+
+    describe("chaining transformations") {
+        describe("individual transformations are applied in sequence") {
+            val p = point(1, 0, 1)
+            val rotate = rotationAroundX(PI / 2)
+            val scale = scaling(5, 5, 5)
+            val translate = translation(10, 5, 7)
+
+            val p2 = rotate * p
+
+            it("apply rotation first") {
+                p2.should.equal(point(1, -1, 0))
+            }
+
+            val p3 = scale * p2
+
+            it("then apply scaling") {
+                p3.should.equal(point(5, -5, 0))
+            }
+
+            val p4 = translate * p3
+
+            it("then apply translation") {
+                p4.should.equal(point(15, 0, 7))
+            }
+        }
+
+        describe("chained transformations must be applied in reverse order due to associative nature of matrix multiplication") {
+            val p = point(1, 0, 1)
+            val rotate = rotationAroundX(PI / 2)
+            val scale = scaling(5, 5, 5)
+            val translate = translation(10, 5, 7)
+
+            val transformedPoint = translate * scale * rotate * p
+
+            it("point should be transformed") {
+                transformedPoint.should.equal(point(15, 0, 7))
+            }
+        }
+    }
 })
