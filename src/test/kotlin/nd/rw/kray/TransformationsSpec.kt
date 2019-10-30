@@ -1,6 +1,7 @@
 package nd.rw.kray
 
 import com.winterbe.expekt.should
+import nd.rw.kray.Matrix.Companion.identity
 import nd.rw.kray.Matrix.Companion.rotationAroundX
 import nd.rw.kray.Matrix.Companion.rotationAroundY
 import nd.rw.kray.Matrix.Companion.rotationAroundZ
@@ -219,6 +220,21 @@ class TransformationsSpec : Spek({
             it("point should be transformed") {
                 transformedPoint.should.equal(point(15, 0, 7))
             }
+        }
+
+        describe("transformations can be applied fluently") {
+            val p = point(1, 0, 1)
+            val transform = identity()
+                .rotateAroundX(PI / 2)
+                .scale(5, 5, 5)
+                .translate(10, 5, 7)
+
+            val transformedPoint = transform * p
+
+            it("point should be transformed") {
+                transformedPoint.should.equal(point(15, 0, 7))
+            }
+
         }
     }
 })

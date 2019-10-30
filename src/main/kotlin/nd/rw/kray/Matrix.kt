@@ -21,7 +21,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             return matrix;
         }
 
-        fun identityMatrix(): Matrix {
+        fun identity(): Matrix {
             return matrix {
                 +Row(1, 0, 0, 0)
                 +Row(0, 1, 0, 0)
@@ -148,6 +148,26 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
             return determinant
         }
+
+    fun rotateAroundX(radiansAsNumber: Number): Matrix {
+        return rotationAroundX(radiansAsNumber) * this
+    }
+
+    fun rotateAroundY(radiansAsNumber: Number): Matrix {
+        return rotationAroundY(radiansAsNumber) * this
+    }
+
+    fun rotateAroundZ(radiansAsNumber: Number): Matrix {
+        return rotationAroundZ(radiansAsNumber) * this
+    }
+
+    fun scale(x: Int, y: Int, z: Int): Matrix {
+        return scaling(x, y, z) * this
+    }
+
+    fun translate(x: Int, y: Int, z: Int): Matrix {
+        return translation(x, y, z) * this
+    }
 
     fun submatrix(row: Int, column: Int): Matrix {
         val copiedMatrix = matrix.map { it.toMutableList() }.toMutableList()

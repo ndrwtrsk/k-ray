@@ -1,5 +1,5 @@
 import com.winterbe.expekt.should
-import nd.rw.kray.Matrix.Companion.identityMatrix
+import nd.rw.kray.Matrix.Companion.identity
 import nd.rw.kray.Matrix.Companion.matrix
 import nd.rw.kray.Row
 import nd.rw.kray.Tuple
@@ -129,7 +129,7 @@ class MatrixSpec : Spek({
                 }
 
                 it("yields the same matrix") {
-                    val result = a * identityMatrix()
+                    val result = a * identity()
                     result.should.equal(a)
                 }
             }
@@ -138,7 +138,7 @@ class MatrixSpec : Spek({
                 val a = Tuple(1, 2, 3, 4)
 
                 it("yields the same tuple") {
-                    val result = identityMatrix() * a
+                    val result = identity() * a
                     result.should.equal(a)
                 }
             }
