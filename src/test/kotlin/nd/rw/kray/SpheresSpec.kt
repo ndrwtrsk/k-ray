@@ -16,8 +16,10 @@ class SpheresSpec : Spek({
 
         it("ray should intersect sphere at it's position of 4.0 and 6.0") {
             xs.size.should.equal(2)
-            xs[0].should.equal(4.0)
-            xs[1].should.equal(6.0)
+            xs[0].t.should.equal(4.0)
+            xs[1].t.should.equal(6.0)
+            xs[0].o.should.equal(sphere)
+            xs[1].o.should.equal(sphere)
         }
     }
 
@@ -29,8 +31,8 @@ class SpheresSpec : Spek({
 
         it("ray should intersect sphere at position 5.0") {
             xs.size.should.equal(2)
-            xs[0].should.equal(5.0)
-            xs[1].should.equal(5.0)
+            xs[0].t.should.equal(5.0)
+            xs[1].t.should.equal(5.0)
         }
     }
 
@@ -53,8 +55,8 @@ class SpheresSpec : Spek({
 
         it("ray should intersect sphere at -1.0 and 1.0") {
             xs.size.should.equal(2)
-            xs[0].should.equal(-1.0)
-            xs[1].should.equal(1.0)
+            xs[0].t.should.equal(-1.0)
+            xs[1].t.should.equal(1.0)
         }
     }
 
@@ -66,8 +68,8 @@ class SpheresSpec : Spek({
 
         it("ray should intersect sphere at -6.0 and -4.0") {
             xs.size.should.equal(2)
-            xs[0].should.equal(-6.0)
-            xs[1].should.equal(-4.0)
+            xs[0].t.should.equal(-6.0)
+            xs[1].t.should.equal(-4.0)
         }
     }
 })
