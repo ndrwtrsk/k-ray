@@ -1,9 +1,9 @@
 package nd.rw.kray
 
 import com.winterbe.expekt.should
-import nd.rw.kray.Matrix.Companion.identity
-import nd.rw.kray.Matrix.Companion.scaling
-import nd.rw.kray.Matrix.Companion.translation
+import nd.rw.kray.Matrix.Companion.identityMatrix
+import nd.rw.kray.Matrix.Companion.scalingMatrix
+import nd.rw.kray.Matrix.Companion.translationMatrix
 import nd.rw.kray.Tuple.Companion.point
 import nd.rw.kray.Tuple.Companion.vector
 import org.spekframework.spek2.Spek
@@ -79,7 +79,7 @@ class SpheresSpec : Spek({
 
         describe("intersecting a scaled sphere with a ray") {
             val ray = Ray(point(0, 0, -5), vector(0, 0, 1))
-            val sphere = Sphere().apply { transformation = scaling(2, 2, 2) }
+            val sphere = Sphere().apply { transformation = scalingMatrix(2, 2, 2) }
 
             val xs = intersect(sphere, ray)
 
@@ -94,16 +94,16 @@ class SpheresSpec : Spek({
         val sphere = Sphere()
 
         it("is identity matrix") {
-            sphere.transformation.should.equal(identity())
+            sphere.transformation.should.equal(identityMatrix())
         }
     }
 
     describe("changing sphere's transformation") {
         val sphere = Sphere()
-        sphere.transformation = translation(1, 2, 3)
+        sphere.transformation = translationMatrix(1, 2, 3)
 
         it("should set it as new one") {
-            sphere.transformation.should.equal(translation(1, 2, 3))
+            sphere.transformation.should.equal(translationMatrix(1, 2, 3))
         }
     }
 

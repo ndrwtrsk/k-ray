@@ -21,7 +21,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             return matrix;
         }
 
-        fun identity(): Matrix {
+        fun identityMatrix(): Matrix {
             return matrix {
                 +Row(1, 0, 0, 0)
                 +Row(0, 1, 0, 0)
@@ -30,7 +30,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
         }
 
-        fun translation(x: Int, y: Int, z: Int): Matrix {
+        fun translationMatrix(x: Int, y: Int, z: Int): Matrix {
             return matrix {
                 +Row(1, 0, 0, x)
                 +Row(0, 1, 0, y)
@@ -39,7 +39,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
         }
 
-        fun scaling(x: Int, y: Int, z: Int): Matrix {
+        fun scalingMatrix(x: Int, y: Int, z: Int): Matrix {
             return matrix {
                 +Row(x, 0, 0, 0)
                 +Row(0, y, 0, 0)
@@ -48,7 +48,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
         }
 
-        fun rotationAroundX(radiansAsNumber: Number): Matrix {
+        fun rotationMatrixAroundX(radiansAsNumber: Number): Matrix {
             val radians = radiansAsNumber.toDouble()
             return matrix {
                 +Row(1, 0, 0, 0)
@@ -58,7 +58,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
         }
 
-        fun rotationAroundY(radiansAsNumber: Number): Matrix {
+        fun rotationMatrixAroundY(radiansAsNumber: Number): Matrix {
             val radians = radiansAsNumber.toDouble()
             return matrix {
                 +Row(cos(radians), 0, sin(radians), 0)
@@ -68,7 +68,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
         }
 
-        fun rotationAroundZ(radiansAsNumber: Number): Matrix {
+        fun rotationMatrixAroundZ(radiansAsNumber: Number): Matrix {
             val radians = radiansAsNumber.toDouble()
             return matrix {
                 +Row(cos(radians), -sin(radians), 0, 0)
@@ -78,7 +78,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
         }
 
-        fun shearing(
+        fun shearingMatrix(
             xToY: Number, xToZ: Number,
             yToX: Number, yToZ: Number,
             zToX: Number, zToY: Number
@@ -150,23 +150,23 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         }
 
     fun rotateAroundX(radiansAsNumber: Number): Matrix {
-        return rotationAroundX(radiansAsNumber) * this
+        return rotationMatrixAroundX(radiansAsNumber) * this
     }
 
     fun rotateAroundY(radiansAsNumber: Number): Matrix {
-        return rotationAroundY(radiansAsNumber) * this
+        return rotationMatrixAroundY(radiansAsNumber) * this
     }
 
     fun rotateAroundZ(radiansAsNumber: Number): Matrix {
-        return rotationAroundZ(radiansAsNumber) * this
+        return rotationMatrixAroundZ(radiansAsNumber) * this
     }
 
     fun scale(x: Int, y: Int, z: Int): Matrix {
-        return scaling(x, y, z) * this
+        return scalingMatrix(x, y, z) * this
     }
 
     fun translate(x: Int, y: Int, z: Int): Matrix {
-        return translation(x, y, z) * this
+        return translationMatrix(x, y, z) * this
     }
 
     fun submatrix(row: Int, column: Int): Matrix {

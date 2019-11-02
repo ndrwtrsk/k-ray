@@ -1,6 +1,6 @@
 import com.winterbe.expekt.should
-import nd.rw.kray.Matrix.Companion.scaling
-import nd.rw.kray.Matrix.Companion.translation
+import nd.rw.kray.Matrix.Companion.scalingMatrix
+import nd.rw.kray.Matrix.Companion.translationMatrix
 import nd.rw.kray.Ray
 import nd.rw.kray.Tuple.Companion.point
 import nd.rw.kray.Tuple.Companion.vector
@@ -44,7 +44,7 @@ class RaySpec : Spek({
 
     describe("translating a ray") {
         val ray = Ray(point(1, 2, 3), vector(0, 1, 0))
-        val translate = translation(3, 4, 5)
+        val translate = translationMatrix(3, 4, 5)
 
         val translatedRay = ray.transformBy(translate)
 
@@ -56,7 +56,7 @@ class RaySpec : Spek({
 
     describe("scaling a ray") {
         val ray = Ray(point(1, 2, 3), vector(0, 1, 0))
-        val scale = scaling(2, 3, 4)
+        val scale = scalingMatrix(2, 3, 4)
 
         val scaledRay = ray.transformBy(scale)
 
