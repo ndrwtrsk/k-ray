@@ -17,9 +17,12 @@ class Ray(val origin: Tuple, val direction: Tuple) {
 }
 
 fun intersect(sphere: Sphere, ray: Ray): Intersections {
-    val sphereToRayDistance = ray.origin - point(0, 0, 0)
-    val a = ray.direction.dot(ray.direction)
-    val b = ray.direction.dot(sphereToRayDistance) * 2
+    val transformedRay = ray.transform(sphere.transformation.inverted)
+    val origin = transformedRay.origin
+    val direction = transformedRay.direction
+    val sphereToRayDistance = origin - point(0, 0, 0)
+    val a = direction.dot(direction)
+    val b = direction.dot(sphereToRayDistance) * 2
     val c = sphereToRayDistance.dot(sphereToRayDistance) - 1
 
     val discriminant = (b * b) - (4 * a * c)

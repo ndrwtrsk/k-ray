@@ -2,6 +2,7 @@ package nd.rw.kray
 
 import com.winterbe.expekt.should
 import nd.rw.kray.Matrix.Companion.identity
+import nd.rw.kray.Matrix.Companion.scaling
 import nd.rw.kray.Matrix.Companion.translation
 import nd.rw.kray.Tuple.Companion.point
 import nd.rw.kray.Tuple.Companion.vector
@@ -10,7 +11,7 @@ import org.spekframework.spek2.style.specification.describe
 
 class SpheresSpec : Spek({
 
-    describe("intersections"){
+    describe("intersections") {
         describe("ray intersects a sphere at two points") {
             val ray = Ray(point(0, 0, -5), vector(0, 0, 1))
             val sphere = Sphere()
@@ -73,6 +74,18 @@ class SpheresSpec : Spek({
                 xs.size.should.equal(2)
                 xs[0].t.should.equal(-6.0)
                 xs[1].t.should.equal(-4.0)
+            }
+        }
+
+        describe("intersecting a scaled sphere with a ray") {
+            val ray = Ray(point(0, 0, -5), vector(0, 0, 1))
+            val sphere = Sphere().apply { transformation = scaling(2, 2, 2) }
+
+            val xs = intersect(sphere, ray)
+
+            it("should apply inverse sphere transformation to ray") {
+                xs[0].t.should.equal(3.0)
+                xs[1].t.should.equal(7.0)
             }
         }
     }
