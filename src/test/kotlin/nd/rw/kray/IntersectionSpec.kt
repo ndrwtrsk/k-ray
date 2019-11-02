@@ -21,12 +21,26 @@ class IntersectionSpec : Spek({
 
     describe("intersections object") {
         val s = Sphere()
-        val xs = Intersections(Intersection(1, s), Intersection(2,s))
+        val xs = Intersections(Intersection(1, s), Intersection(2, s))
 
         it("aggregates individual intersections") {
             xs.intersections.size.should.equal(2)
             xs.intersections[0].t.should.equal(1.0)
             xs.intersections[1].t.should.equal(2.0)
+        }
+    }
+
+    describe("hit") {
+        val s = Sphere()
+        val xs = Intersections(
+            Intersection(5, s),
+            Intersection(7, s),
+            Intersection(-3, s),
+            Intersection(2, s)
+        )
+
+        it("is always the lowest non negative intersection") {
+            xs.hit().should.equal(Intersection(2, s))
         }
     }
 
