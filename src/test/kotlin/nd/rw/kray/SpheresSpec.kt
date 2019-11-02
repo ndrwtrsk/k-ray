@@ -1,6 +1,8 @@
 package nd.rw.kray
 
 import com.winterbe.expekt.should
+import nd.rw.kray.Matrix.Companion.identity
+import nd.rw.kray.Matrix.Companion.translation
 import nd.rw.kray.Tuple.Companion.point
 import nd.rw.kray.Tuple.Companion.vector
 import org.spekframework.spek2.Spek
@@ -70,6 +72,23 @@ class SpheresSpec : Spek({
             xs.size.should.equal(2)
             xs[0].t.should.equal(-6.0)
             xs[1].t.should.equal(-4.0)
+        }
+    }
+
+    describe("sphere's default transformation") {
+        val sphere = Sphere()
+
+        it("is identity matrix") {
+            sphere.transformation.should.equal(identity())
+        }
+    }
+
+    describe("changing sphere's transformation") {
+        val sphere = Sphere()
+        sphere.transformation = translation(1, 2, 3)
+
+        it("should set it as new one") {
+            sphere.transformation.should.equal(translation(1, 2, 3))
         }
     }
 })
