@@ -26,19 +26,19 @@ class RaySpec : Spek({
         val ray = Ray(point(2, 3, 4), vector(1, 0, 0))
 
         it("position at 0") {
-            ray.position(0).should.equal(point(2, 3, 4))
+            ray.positionAt(0).should.equal(point(2, 3, 4))
         }
 
         it("position at 1") {
-            ray.position(1).should.equal(point(3, 3, 4))
+            ray.positionAt(1).should.equal(point(3, 3, 4))
         }
 
         it("position at -1") {
-            ray.position(-1).should.equal(point(1, 3, 4))
+            ray.positionAt(-1).should.equal(point(1, 3, 4))
         }
 
         it("position at 2.5") {
-            ray.position(2.5).should.equal(point(4.5, 3, 4))
+            ray.positionAt(2.5).should.equal(point(4.5, 3, 4))
         }
     }
 
@@ -46,7 +46,7 @@ class RaySpec : Spek({
         val ray = Ray(point(1, 2, 3), vector(0, 1, 0))
         val translate = translation(3, 4, 5)
 
-        val translatedRay = ray.transform(translate)
+        val translatedRay = ray.transformBy(translate)
 
         it("ray's origin and direction have been translated") {
             translatedRay.origin.should.equal(point(4, 6, 8))
@@ -58,7 +58,7 @@ class RaySpec : Spek({
         val ray = Ray(point(1, 2, 3), vector(0, 1, 0))
         val scale = scaling(2, 3, 4)
 
-        val scaledRay = ray.transform(scale)
+        val scaledRay = ray.transformBy(scale)
 
         it("ray's origin and direction have been scaled") {
             scaledRay.origin.should.equal(point(2, 6, 12))

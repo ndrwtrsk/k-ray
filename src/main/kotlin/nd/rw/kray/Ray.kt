@@ -6,18 +6,18 @@ import kotlin.math.sqrt
 
 class Ray(val origin: Tuple, val direction: Tuple) {
 
-    fun position(t: Number): Tuple {
+    fun positionAt(t: Number): Tuple {
         return origin + direction * t
     }
 
-    fun transform(transformation: Matrix) : Ray {
+    fun transformBy(transformation: Matrix) : Ray {
         return Ray(transformation * origin, transformation * direction)
     }
 
 }
 
 fun intersect(sphere: Sphere, ray: Ray): Intersections {
-    val transformedRay = ray.transform(sphere.transformation.inverted)
+    val transformedRay = ray.transformBy(sphere.transformation.inverted)
     val origin = transformedRay.origin
     val direction = transformedRay.direction
     val sphereToRayDistance = origin - point(0, 0, 0)
