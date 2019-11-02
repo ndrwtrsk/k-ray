@@ -10,6 +10,10 @@ class Ray(val origin: Tuple, val direction: Tuple) {
         return origin + direction * t
     }
 
+    fun transform(transformation: Matrix) : Ray {
+        return Ray(transformation * origin, transformation * direction)
+    }
+
 }
 
 fun intersect(sphere: Sphere, ray: Ray): Intersections {
