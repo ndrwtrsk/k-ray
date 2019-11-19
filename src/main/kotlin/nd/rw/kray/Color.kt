@@ -8,6 +8,7 @@ class Color(val red: Double, val green: Double, val blue: Double) {
             : this(red.toDouble(), green.toDouble(), blue.toDouble())
 
     companion object {
+        val white: Color = Color(1, 1, 1)
         val black: Color = Color(0, 0, 0)
     }
 
