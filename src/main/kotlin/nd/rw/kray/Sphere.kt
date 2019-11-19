@@ -6,7 +6,8 @@ import nd.rw.kray.Tuple.Companion.vector
 
 class Sphere(
     val origin: Tuple = point(0, 0, 0),
-    val transformation: Matrix = identityMatrix()
+    val transformation: Matrix = identityMatrix(),
+    val material: Material = Material()
 ) {
 
     fun normalAt(worldPoint: Tuple): Tuple {
