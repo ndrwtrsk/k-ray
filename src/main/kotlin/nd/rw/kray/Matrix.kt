@@ -39,7 +39,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
             }
         }
 
-        fun scalingMatrix(x: Int, y: Int, z: Int): Matrix {
+        fun scalingMatrix(x: Number, y: Number, z: Number): Matrix {
             return matrix {
                 +Row(x, 0, 0, 0)
                 +Row(0, y, 0, 0)
@@ -161,7 +161,7 @@ open class Matrix(protected val matrix: MutableList<MutableList<Double>> = array
         return rotationMatrixAroundZ(radiansAsNumber) * this
     }
 
-    fun scale(x: Int, y: Int, z: Int): Matrix {
+    fun scale(x: Number, y: Number, z: Number): Matrix {
         return scalingMatrix(x, y, z) * this
     }
 
