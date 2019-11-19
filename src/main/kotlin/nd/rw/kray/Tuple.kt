@@ -133,5 +133,9 @@ class Tuple(val x: Double, val y: Double, val z: Double, val w: Double) {
         return "Tuple(x=$x, y=$y, z=$z, w=$w)"
     }
 
+    fun reflect(normal: Tuple): Tuple {
+        return this - normal * 2 * this.dot(normal)
+    }
+
 
 }

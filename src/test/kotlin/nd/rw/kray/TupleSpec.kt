@@ -27,15 +27,15 @@ object TupleSpec : Spek({
         }
 
         describe("from a list of values") {
-            val tuple = Tuple(listOf(1,2,3,4))
+            val tuple = Tuple(listOf(1, 2, 3, 4))
             it("is a correct tuple") {
-                tuple.should.equal(Tuple(1,2,3,4))
+                tuple.should.equal(Tuple(1, 2, 3, 4))
             }
         }
     }
 
     describe("indexing operator") {
-        val tuple = Tuple(1,2,3,4)
+        val tuple = Tuple(1, 2, 3, 4)
         it("values are correctly indexed") {
             tuple[0].should.equal(1.0)
             tuple[1].should.equal(2.0)
@@ -180,6 +180,30 @@ object TupleSpec : Spek({
         describe("magnitude of a normalized vector") {
             it("should be 1") {
                 vector(1, 2, 3).normalize.magnitude.should.equal(1.0)
+            }
+        }
+    }
+
+    describe("reflecting") {
+        describe("a vector approaching 45 deg") {
+            val vector = vector(1, -1, 0)
+            val normal = vector(0, 1, 0)
+
+            val reflection = vector.reflect(normal)
+
+            it("should result in a bounced away vector") {
+                reflection.should.equal(vector(1, 1, 0))
+            }
+        }
+
+        describe("a vector falling on 45 deg slanted surface") {
+            val vector = vector(0, -1, 0)
+            val normal = vector(sqrt(2.0) / 2, sqrt(2.0) / 2, 0)
+
+            val reflection = vector.reflect(normal)
+
+            it("should result in a bounced vector bounced horizontally") {
+                reflection.should.equal(vector(1, 0, 0))
             }
         }
     }
