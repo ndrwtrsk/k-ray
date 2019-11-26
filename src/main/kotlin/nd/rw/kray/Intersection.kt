@@ -21,9 +21,16 @@ class Intersection(val t: Double, val o: Any) {
     }
 }
 
-class Intersections(val intersections: List<Intersection>) {
+class Intersections {
+
+    val intersections: List<Intersection>
+
+    constructor(intersections: List<Intersection>) {
+        this.intersections = intersections.sortedBy(Intersection::t)
+    }
 
     constructor(vararg intersections: Intersection) : this(intersections.toList())
+
 
     companion object {
 
@@ -32,7 +39,8 @@ class Intersections(val intersections: List<Intersection>) {
         }
     }
 
-    val size: Int = intersections.size
+    val size: Int
+        get() = intersections.size
 
     fun hit(): Intersection? {
         return intersections.filter { it.t > 0.0 }.minBy { it.t }

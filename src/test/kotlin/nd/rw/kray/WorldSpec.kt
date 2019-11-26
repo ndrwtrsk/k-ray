@@ -1,10 +1,8 @@
 import com.winterbe.expekt.should
-import nd.rw.kray.Color
-import nd.rw.kray.Material
+import nd.rw.kray.*
 import nd.rw.kray.Matrix.Companion.scalingMatrix
-import nd.rw.kray.PointLight
-import nd.rw.kray.Sphere
 import nd.rw.kray.Tuple.Companion.point
+import nd.rw.kray.Tuple.Companion.vector
 import nd.rw.kray.World.Companion.defaultWorld
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
@@ -30,6 +28,24 @@ class WorldSpec : Spek({
             defaultWorld.contains(s1).should.equal(true)
             defaultWorld.contains(s2).should.equal(true)
         }
+    }
+
+    describe("intersections") {
+        describe("ray within a world") {
+            val w = defaultWorld
+            val ray = Ray(point(0,0,-5), vector(0,0,1))
+
+            val intersections = w.intersect(ray)
+
+            it("computes") {
+                intersections.size.should.equal(4)
+                intersections[0].t.should.equal(4.0)
+                intersections[1].t.should.equal(4.5)
+                intersections[2].t.should.equal(5.5)
+                intersections[3].t.should.equal(6.0)
+            }
+        }
+
     }
 
 })

@@ -2,6 +2,7 @@ package nd.rw.kray
 
 import nd.rw.kray.Color.Companion.white
 import nd.rw.kray.Tuple.Companion.point
+import nd.rw.kray.intersect as computeIntersections
 
 class World(val pointLight: PointLight, val spheres: List<Sphere>) {
 
@@ -24,6 +25,14 @@ class World(val pointLight: PointLight, val spheres: List<Sphere>) {
 
     fun contains(sphere: Sphere): Boolean {
         return spheres.contains(sphere)
+    }
+
+    fun intersect(ray: Ray): Intersections {
+        val intersections = spheres.map { sphere -> computeIntersections(sphere, ray) }
+            .flatMap(Intersections::intersections)
+
+        return Intersections(intersections)
+
     }
 
 }
