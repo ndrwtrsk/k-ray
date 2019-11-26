@@ -4,7 +4,7 @@ import nd.rw.kray.Matrix.Companion.identityMatrix
 import nd.rw.kray.Tuple.Companion.point
 import nd.rw.kray.Tuple.Companion.vector
 
-class Sphere(
+data class Sphere(
     val origin: Tuple = point(0, 0, 0),
     val transformation: Matrix = identityMatrix(),
     val material: Material = Material()
